@@ -6,6 +6,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../constants.dart';
 import '../components/bottom_button.dart';
 import '../components/round_icon_button.dart';
+import 'package:bmi_calculator_flutter/calculator_brain.dart';
+
+//TODO: Block Rotation
 
 enum Gender {
   male,
@@ -218,10 +221,15 @@ class _InputPageState extends State<InputPage> {
           ),
           BottomButton(
             onTap:() {
+              CalculatorBrain calc = CalculatorBrain(height: height, weight: weight,age: age);
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const ResultsPage(),
+                  builder: (context) => ResultsPage(
+                      bmiResult: calc.calculateBMI(),
+                      resultText:calc.getResult(),
+                      interpretation: calc.getInterpretation()
+                  ),
                 ),
               );
             },
