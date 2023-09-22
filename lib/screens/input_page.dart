@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'reusable_card.dart';
-import 'icon_content.dart';
+import '../components/reusable_card.dart';
+import '../components/icon_content.dart';
 import 'results_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'constants.dart';
+import '../constants.dart';
+import '../components/bottom_button.dart';
+import '../components/round_icon_button.dart';
 
 enum Gender {
   male,
@@ -97,12 +99,12 @@ class _InputPageState extends State<InputPage> {
                           SliderTheme(
                             data: SliderTheme.of(context).copyWith(
                               trackHeight: 1,
-                              thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15),
-                              overlayShape: RoundSliderOverlayShape(overlayRadius: 30),
-                              overlayColor: Color(0x29EB1555),
-                              thumbColor: Color(0xFFEB1555),
+                              thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 15),
+                              overlayShape: const RoundSliderOverlayShape(overlayRadius: 30),
+                              overlayColor: const Color(0x29EB1555),
+                              thumbColor: const Color(0xFFEB1555),
                               activeTrackColor: Colors.white,
-                              inactiveTrackColor: Color(0xFF8D8E98),
+                              inactiveTrackColor: const Color(0xFF8D8E98),
                             ),
                             child: Slider(
                               value: height.toDouble(),
@@ -193,7 +195,7 @@ class _InputPageState extends State<InputPage> {
                                   });
                                 }
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               RoundIconButton(
@@ -214,47 +216,19 @@ class _InputPageState extends State<InputPage> {
                 ],
               )
           ),
-          GestureDetector(
-            onTap:(){
+          BottomButton(
+            onTap:() {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ResultsPage()),
+                MaterialPageRoute(
+                  builder: (context) => const ResultsPage(),
+                ),
               );
             },
-            child: Container(
-              child: Text(
-                'Calculate'
-              ),
-              margin: const EdgeInsets.only(top: 10),
-              color: kBottomContainerColor,
-              height: kBottomContainerHeight,
-              width: double.infinity,
-            ),
-          )
+            buttonTitle: "CALCULATE",
+          ),
         ],
       )
-    );
-  }
-}
-
-
-class RoundIconButton extends StatelessWidget {
-  const RoundIconButton({Key? key,required this.icon, required this.onPressed}) : super(key: key);
-
-  final IconData icon;
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      constraints: const BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0,
-      ),
-      shape: const CircleBorder(),
-      fillColor: const Color(0xff4c4f5e),
-      onPressed: onPressed,
-      child: Icon(icon),
     );
   }
 }
