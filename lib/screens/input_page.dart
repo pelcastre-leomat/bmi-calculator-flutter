@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../components/reusable_card.dart';
 import '../components/icon_content.dart';
 import 'results_page.dart';
@@ -28,6 +29,12 @@ class _InputPageState extends State<InputPage> {
   int height = 170;
   int weight = 60;
   int age = 18;
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  }
 
   @override
   Widget build(BuildContext context) {
